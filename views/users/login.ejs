@@ -1,0 +1,23 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="row mt-3">
+  <!-- 1. Changed header to Login -->
+  <h1 class="col-6 offset-4">Login</h1> 
+  <div class="col-4 offset-4">
+    <!-- 2. Action remains /login -->
+    <form action="/login" method="POST" class="needs-validation" novalidate>
+      <div>
+        <!-- Typo fix: form-lable changed to form-label -->
+        <label class="form-label" for="username">Username</label> 
+        <input class="form-control" name="username" id="username" type="text" required />
+      </div>
+     
+      <div class="mt-2">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" name="password" id="password" type="password" required />
+      </div>
+      
+      <button class="btn btn-success mt-3">Login</button>
+    </form>
+  </div>
+</div>
