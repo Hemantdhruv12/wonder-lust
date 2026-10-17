@@ -1,68 +1,108 @@
 <body>
   
   <style>
-    .fa-magnifying-glass{
-      font-size: 12px;
-      color: white;
-      margin-right: 4px;
-      display: inline;
-      align-items: center;
+  /* ─── Search Bar & Icons ─── */
+  .fa-magnifying-glass {
+    font-size: 12px;
+    color: white;
+    margin-right: 6px;
+  }
+
+  .btn-outline-success {
+    height: 38px;
+    color: rgb(255, 255, 255);
+    background-color: #fe424d;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    padding: 0 1.25rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-outline-success:hover, 
+  .btn-outline-success:active, 
+  .btn-outline-success:focus {
+    background-color: #e0323c !important;
+    color: white !important;
+    box-shadow: none !important;
+  }
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+  }
+
+  /* ─── 📱 Responsive Mobile Menu Fixes ─── */
+  @media (max-width: 991.98px) {
+    /* Gives the mobile dropdown menu item spacing so they don't look cramped */
+    .navbar-collapse {
+      background-color: #ffffff; /* Bulletproof solid background when menu expands */
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-top: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds clean depth layer */
     }
-.btn-outline-success{
-  height: 34px;
-  color: rgb(255, 255, 255);
-  background-color:#fe424d ;
-  outline: none;
-  border: none;
-  border-radius: 25px;
-  padding: 0 1rem 0 1rem;
-  
-}
-.search-inp{
-  border-radius: 25px;
-  padding: 0.5rem 3rem 0.5 rem 3rem;
-}
 
-  </style>
+    /* Centers the search engine block elements on phone screens */
+    .navbar-nav.ms-auto.search-container {
+      margin: 0.75rem 0 !important;
+      width: 100%;
+    }
 
-  <nav class="navbar navbar-expand-lg bg-body-light sticky-top border-bottom"> 
-    <div class="container-fluid"> 
-      <a class="navbar-brand" href="/listings">
-        <i class="fa-regular fa-compass"></i>
-        
-      </a> 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> 
-        <span class="navbar-toggler-icon"></span> 
-      </button> 
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
-        <div class="navbar-nav"> 
-          <a class="nav-link" href="/listings">Explore</a> 
-          
-        </div> 
-<div class="navbar-nav ms-auto">
-  <form class="d-flex align-items-center" role="search">
-    <!-- Styled search input with custom rounded pill borders -->
-    <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" aria-label="Search"/>
+    .navbar-nav.ms-auto.search-container form {
+      width: 100%;
+    }
+
+    .search-inp {
+      width: 100%; /* Force search input to expand comfortably on phone layout rows */
+    }
+  }
+</style>
+
+<!-- 💡 Fixed bg-body-light typo by switching to Bootstrap's standard bg-body-tertiary background utility -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom px-3"> 
+  <div class="container-fluid"> 
     
-    <!-- Corrected Bootstrap button element -->
-    <button class="btn btn-outline-success d-flex align-items-center " type="submit">
-      <i class="fa-solid fa-magnifying-glass "></i> Search
-    </button>
-  </form>
-</div>
-
-
-        <div class="navbar-nav ms-auto"> 
-          <a class="nav-link" href="/listings/new">Add New Listing</a> 
-          <% if(!currUser) { %> 
-            <a class="nav-link" href="/signup">Signup</a> 
-            <a class="nav-link" href="/login">Login</a> 
-          <% } %> 
-          <% if(currUser) { %> 
-            <a class="nav-link" href="/logout">Logout</a> 
-          <% } %> 
-        </div> 
+    <!-- Brand Compass Icon Link -->
+    <a class="navbar-brand" href="/listings" style="color: #fe424d; font-size: 1.4rem;">
+      <i class="fa-solid fa-compass"></i>
+    </a> 
+    
+    <!-- Mobile Hamburger Toggle Button Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> 
+      <span class="navbar-toggler-icon"></span> 
+    </button> 
+    
+    <!-- Collapsible Target Dropdown Window Grid Box -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
+      
+      <!-- Core Left Navigation Links -->
+      <div class="navbar-nav"> 
+        <a class="nav-link" href="/listings">Explore</a> 
       </div> 
+
+      <!-- Center Search Element Wrapper Module -->
+      <div class="navbar-nav ms-auto search-container">
+        <form class="d-flex align-items-center" action="/listings" method="GET" role="search">
+          <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations" aria-label="Search"/>
+          <button class="btn btn-outline-success d-flex align-items-center" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Authentication Action Right Routing Block -->
+      <div class="navbar-nav ms-auto"> 
+        <a class="nav-link" href="/listings/new">Add New Listing</a> 
+        <% if(!currUser) { %> 
+          <a class="nav-link" href="/signup">Signup</a> 
+          <a class="nav-link" href="/login">Login</a> 
+        <% } %> 
+        <% if(currUser) { %> 
+          <a class="nav-link" href="/logout">Logout</a> 
+        <% } %> 
+      </div> 
+
     </div> 
-  </nav> 
-</body>
+  </div> 
+</nav>
